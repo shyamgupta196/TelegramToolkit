@@ -2,7 +2,7 @@
 
 ## Description
 
-Telegram channels are public broadcast channels on the Telegram messaging platform where creators can share messages, media, and updates with a large audience. Users can join channels to receive notifications and access content posted by the channel administrators, making it an effective tool for disseminating information to a wide audience. The Telegram Toolkit is a powerful software designed to enhance Telegram data by uncovering implicit information not directly available through the platform. It facilitates tasks such as revealing connections between channels and creating message-forwarding chains, providing users with valuable insights and analysis capabilities.
+Telegram channels are public broadcast channels on the Telegram messaging platform where creators can share messages, media, and updates with a large audience. Users can join channels to receive notifications and access content posted by the channel administrators, making it an effective tool for disseminating information to a wide audience. The Telegram Toolkit is a powerful software designed to enhance collected Telegram data by uncovering implicit information not directly available through the platform. It facilitates tasks such as revealing connections between channels and creating message-forwarding chains, providing users with valuable insights and analysis capabilities.
 
 The Telegram Toolkit provides the following functionalities:
 
@@ -20,28 +20,30 @@ Entity Detection, Graph Generation, Information Spread.
 
 ## Relevant research questions that could be addressed with the help of this method 
 
-1. *Information Flow Analysis*: How does the use of the Telegram channel graph and entities enhance our understanding of information dissemination patterns within and across Telegram channels?
+The Telegram Toolkit is designed to provide enriched data and features to address research questions like:
 
-2. *Network Analysis*: What insights can be gained from analyzing the network structure of Telegram channels and their connections using the features provided by the TelegramToolkit?
+  1. *Information Flow Analysis*: How does the use of the Telegram channel graph and entities enhance our understanding of information dissemination patterns within and across Telegram channels?
 
-3. *Content Analysis*: How does the content shared across Telegram channels evolve over time, and how can entities assist in identifying trends, biases, and influential content creators?
+  2. *Network Analysis*: What insights can be gained from analyzing the network structure of Telegram channels and their connections using the features provided by the Telegram Toolkit?
 
-4. *Audience Engagement*: To what extent does audience engagement, measured by factors such as message forwarding chains and user interaction, contribute to the success and longevity of Telegram channels?
+  3. *Content Analysis*: How does the content shared across Telegram channels evolve over time, and how can entities assist in identifying trends, biases, and influential content creators?
 
-5. *Community Structure and Boundary Formation*: How do the structures of message forwarding networks, uncovered by the TelegramToolkit, inform our understanding of community boundaries, subgroup formations, and the processes of inclusion and exclusion within Telegram ecosystems, and what implications do these dynamics have for social cohesion and identity formation?
+  4. *Audience Engagement*: To what extent does audience engagement, measured by factors such as message forwarding chains and user interaction, contribute to the success and longevity of Telegram channels?
 
-6. *Disinformation and Misinformation*: How can the tracking of message propagation pathways assist in unraveling the dynamics of misinformation dissemination, rumor amplification, and collective sensemaking processes within Telegram channels, and what strategies can be devised to foster critical thinking and information literacy in online communities?
+  5. *Community Structure and Boundary Formation*: How do the structures of message forwarding networks, uncovered by the TelegramToolkit, inform our understanding of community boundaries, subgroup formations, and the processes of inclusion and exclusion within Telegram ecosystems, and what implications do these dynamics have for social cohesion and identity formation?
+
+  6. *Disinformation and Misinformation*: How can the tracking of message propagation pathways assist in unraveling the dynamics of misinformation dissemination, rumor amplification, and collective sensemaking processes within Telegram channels, and what strategies can be devised to foster critical thinking and information literacy in online communities?
 
 ### Social Science Usecase
 
-Upon finding the Telegram Toolkit in MH, John explores its features and capabilities. He discovers functionalities such as entity identification and message chain generation, which are relevant to his research on disinformation in Telegram channels. John obtains a dataset of messages collected from Telegram channels using appropriate data collection methods. He ensures that the dataset covers the relevant time period corresponding to the US Presidential Elections and contains messages from channels known for spreading political information and disinformation. John imports the collected dataset into the Telegram Toolkit for analysis. He verifies the integrity and format of the data to ensure compatibility with the Toolkit's processing algorithms. Using the Toolkit's entity identification feature, John identifies key entities related to the Presidential Elections within the dataset. Then, he creates the message chains and investigates how disinformation propagates through message forwarding chains and explores the dynamics of information diffusion within the network.
+Upon finding the Telegram Toolkit in the Methods Hub, John explores its features and capabilities. He discovers functionalities such as entity identification and message chain generation, which are relevant to his research on disinformation in Telegram channels. John obtains a dataset of messages collected from Telegram channels using appropriate data collection methods. He ensures that the dataset covers the relevant period corresponding to the US Presidential Elections and contains messages from channels known for spreading political information and disinformation. John imports the collected dataset into the Telegram Toolkit for analysis. He verifies the integrity and format of the data to ensure compatibility with the Toolkit's processing algorithms. Using the Toolkit's entity identification feature, John identifies key entities related to the Presidential Elections within the dataset. Then, he creates the message chains; now he can investigate how disinformation propagates through message forwarding chains and explores the dynamics of information diffusion within the network.
 
-Sarah designs her research study to explore the social dynamics within Telegram communities, focusing on the role of message forwarding networks in shaping community boundaries and subgroup formations. Sarah collects a dataset of messages from a diverse range of Telegram channels representing various communities and topics of interest. She ensures that the dataset covers a sufficient time period to capture the evolution of community dynamics. Sarah uses the TelegramToolkit to extract the channel to channel graph. She can now identify central nodes, clusters, and subgroups within the networks to understand how information flows and circulates within the communities.
+Sarah designs her research study to explore the social dynamics within Telegram communities, focusing on the role of message-forwarding networks in shaping community boundaries and subgroup formations. Sarah collects a dataset of messages from a diverse range of Telegram channels representing various communities and topics of interest. She ensures that the dataset covers a sufficient period to capture the evolution of community dynamics. Sarah uses the Telegram Toolkit to extract the channel-to-channel graph. She can now identify central nodes, clusters, and subgroups within the networks to understand how information flows and circulates within the communities.
 
 
 ## Structure
 
-- *data/* contains a sample data composed by different files. Each file contains messages from a specific channel.
+- *data/* contains sample data composed of different files. Each file contains messages from a specific channel.
 
 - *sample_output_entities/* and *sample_output/* contain sample output dataset as described below.
 
@@ -68,16 +70,16 @@ options:
   -o OUTPUT_DATA_DIR, --output-data-dir OUTPUT_DATA_DIR
                         The output directory where there results will be saved. Default: 'out/'
   -re, --resolve-entities
-                        Resolve the entities in the raw Telegran data collection.
+                        Resolve the entities in the raw Telegram data collection.
   -ccg, --create-channel-graph
-                        Create the channel to channel graph from the Telegram data collection.
+                        Create the channel-to-channel graph from the Telegram data collection.
   -cmc, --create-message-chain
-                        Create the messages chains of the messages from the Telegram data collection.
+                        Create the message chains of the messages from the Telegram data collection.
   -gn GRAPH_NAME, --graph-name GRAPH_NAME
-                        Name of the graph created using the '-ccg' or '--create-channel-graph' option. Deaflaut: mygraph
+                        Name of the graph created using the '-ccg' or '--create-channel-graph' option. Default: mygraph
   -mcn MESSAGE_CHAIN_NAME, --message-chain-name MESSAGE_CHAIN_NAME
                         Name of the CSV file containing the information to which channels a message was forwarded to. It only works with either '-cmc' or '--create-
-                        message-chain' option. Deaflaut: my_message_chain
+                        message-chain' option. Default: my_message_chain
 
 ```
 

@@ -172,12 +172,12 @@ if __name__ == '__main__':
 
 	parser = argparse.ArgumentParser(description='Telegram Toolkit Commands')
 	parser.add_argument('-i', '--input-data-dir', dest='input_data_dir', default='data/', type=str, action='store', help='The input directory containing raw data from Telegram. Default: \'data/\'')
-	parser.add_argument('-o', '--output-data-dir', dest='output_data_dir', default='out/', type=str, action='store', help='The output directory where there results will be saved. Default: \'out/\'')
+	parser.add_argument('-o', '--output-data-dir', dest='output_data_dir', default='out/', type=str, action='store', help='The output directory where the results will be saved. Default: \'out/\'')
 	parser.add_argument('-re', '--resolve-entities', dest='resolve_entity_flag', action='store_true', help='Resolve the entities in the raw Telegran data collection.')
-	parser.add_argument('-ccg', '--create-channel-graph', dest='create_channel_graph_flag', action='store_true', help='Create the channel to channel graph from the Telegram data collection.')
-	parser.add_argument('-cmc', '--create-message-chain', dest='create_message_chain_flag', action='store_true', help='Create the messages chains of the messages from the Telegram data collection.')
-	parser.add_argument('-gn', '--graph-name', dest='graph_name', default='mygraph', action='store', help='Name of the graph created using the \'-ccg\' or \'--create-channel-graph\' option. Deaflaut: mygraph')
-	parser.add_argument('-mcn', '--message-chain-name', dest='message_chain_name', default='my_message_chain', action='store', help='Name of the CSV file containing the information to which channels a message was forwarded to. It only works with either \'-cmc\' or \'--create-message-chain\' option. Deaflaut: my_message_chain')
+	parser.add_argument('-ccg', '--create-channel-graph', dest='create_channel_graph_flag', action='store_true', help='Create the channel-to-channel graph from the Telegram data collection.')
+	parser.add_argument('-cmc', '--create-message-chain', dest='create_message_chain_flag', action='store_true', help='Create the message chains of the messages from the Telegram data collection.')
+	parser.add_argument('-gn', '--graph-name', dest='graph_name', default='mygraph', action='store', help='Name of the graph created using the \'-ccg\' or \'--create-channel-graph\' option. Default: mygraph')
+	parser.add_argument('-mcn', '--message-chain-name', dest='message_chain_name', default='my_message_chain', action='store', help='Name of the CSV file containing the information to which channels a message was forwarded to. It only works with either \'-cmc\' or \'--create-message-chain\' option. Default: my_message_chain')
 	args = parser.parse_args()
 
 	# Add '\' character to directory paths if not present

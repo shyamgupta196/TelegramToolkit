@@ -10,7 +10,7 @@ The Telegram Toolkit provides the following functionalities:
 
 2. *Channel to channel graph*. Given the collected data, it creates a channel-to-channel graph where nodes are the channels and edges are built when a message is forwarded from a channel (source) to a destination channel. This functionality creates a graph in [GML format](https://networkx.org/documentation/stable/reference/readwrite/gml.html). The edges are associated with the times when messages are forwarded.
 
-3. *Message chain generation*. When you post a message and someone re-posts or forwards it, you are usually able to see where and when the message is forwarded. This does not happen with Telegram messages. As a solution, this functionality creates a CSV file where each source message (i.e., a new message) is associated at least with one destination message (i.e., forwarded message), the forwarding time, and the message text. Messages that are never forwarded do not appear in the CSV. The user must note that the source message and its channel might not be contained in the input collection of data; this is because Telegram does not provide information about where a message was forwarded and the proposed generation uses a backward mechanism starting from the destination messages.
+3. *Message chain generation*. When you post a message and someone re-posts or forwards it, you can usually see where and when the message is forwarded. This does not happen with Telegram messages. As a solution, this functionality creates a CSV file where each source message (i.e., a new message) is associated at least with one destination message (i.e., forwarded message), the forwarding time, and the message text. Messages that are never forwarded do not appear in the CSV. The user must note that the source message and its channel might not be contained in the input collection of data; this is because Telegram does not provide information about where a message is forwarded and the proposed generation uses a backward mechanism starting from the destination messages.
 
 
 *Note*: This tool is under active development, and new functionalities will be continuously added. If you have ideas for features that would enhance your research experience, please open an issue to share your suggestions with the MH Team. We'll carefully review each proposal to determine feasibility and prioritize implementation. Thank you for exploring our tool!
@@ -18,9 +18,9 @@ The Telegram Toolkit provides the following functionalities:
 ## Keywords
 Entity Detection, Graph Generation, Information Spread.
 
-## Relevant research questions that could be adressed with the help of this method 
+## Relevant research questions that could be addressed with the help of this method 
 
-1. *Information Flow Analysis*: How does the use of the telegram channel graph and entities enhance our understanding of information dissemination patterns within and across Telegram channels?
+1. *Information Flow Analysis*: How does the use of the Telegram channel graph and entities enhance our understanding of information dissemination patterns within and across Telegram channels?
 
 2. *Network Analysis*: What insights can be gained from analyzing the network structure of Telegram channels and their connections using the features provided by the TelegramToolkit?
 
@@ -102,9 +102,9 @@ A sample output (using the data under *data/*) is made available with this repos
 
 - *sample_output/* contains:
 
-  - *mygraph.gml* the channel to channel graph with information about the times a destination channel posted a message from a source channel.
+  - *mygraph.gml* the channel-to-channel graph with information about the times a destination channel posted a message from a source channel.
 
-  - *my_message_chain.csv* the CSV file containing informationabout the source message id, source channel id, destination message id, destination channel id, time, and message text.
+  - *my_message_chain.csv* the CSV file containing information about the *source message id*, *source channel id*, *destination message id*, *destination channel id*, *time*, and *message text*.
 
 
 ### Limitation

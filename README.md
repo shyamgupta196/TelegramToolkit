@@ -10,11 +10,13 @@ The Telegram Toolkit provides the following functionalities:
 
 2. *Channel to channel graph*. Given the collected data, it creates a channel-to-channel graph where nodes are the channels and edges are built when a message is forwarded from a channel (source) to a destination channel. This functionality creates a graph in [GML format](https://networkx.org/documentation/stable/reference/readwrite/gml.html). The edges are associated with the times when messages are forwarded.
 
-3. *Message chain generation*. This functionality creates a CSV file where each source message is associated at least with one destination message, the forwarding time, and the message text. Messages that are never forwarded do not appear in the CSV. The user should also note that the source message and its channel might not be contained in the input collection of data; this is because Telegram does not provide information about where a message was forwarded and the proposed generation uses a backward mechanism starting from the destination messages.
+3. *Message chain generation*. When you post a message and someone re-posts or forwards it, you are usually able to see where and when the message is forwarded. This does not happen with Telegram messages. As a solution, this functionality creates a CSV file where each source message (i.e., a new message) is associated at least with one destination message (i.e., forwarded message), the forwarding time, and the message text. Messages that are never forwarded do not appear in the CSV. The user must note that the source message and its channel might not be contained in the input collection of data; this is because Telegram does not provide information about where a message was forwarded and the proposed generation uses a backward mechanism starting from the destination messages.
 
 
 *Note*: This tool is under active development, and new functionalities will be continuously added. If you have ideas for features that would enhance your research experience, please open an issue to share your suggestions with the MH Team. We'll carefully review each proposal to determine feasibility and prioritize implementation. Thank you for exploring our tool!
 
+## Keywords
+Entity Detection, Graph Generation, Information Spread.
 
 ## Relevant research questions that could be adressed with the help of this method 
 
@@ -35,10 +37,6 @@ The Telegram Toolkit provides the following functionalities:
 Upon finding the Telegram Toolkit in MH, John explores its features and capabilities. He discovers functionalities such as entity identification and message chain generation, which are relevant to his research on disinformation in Telegram channels. John obtains a dataset of messages collected from Telegram channels using appropriate data collection methods. He ensures that the dataset covers the relevant time period corresponding to the US Presidential Elections and contains messages from channels known for spreading political information and disinformation. John imports the collected dataset into the Telegram Toolkit for analysis. He verifies the integrity and format of the data to ensure compatibility with the Toolkit's processing algorithms. Using the Toolkit's entity identification feature, John identifies key entities related to the Presidential Elections within the dataset. Then, he creates the message chains and investigates how disinformation propagates through message forwarding chains and explores the dynamics of information diffusion within the network.
 
 Sarah designs her research study to explore the social dynamics within Telegram communities, focusing on the role of message forwarding networks in shaping community boundaries and subgroup formations. Sarah collects a dataset of messages from a diverse range of Telegram channels representing various communities and topics of interest. She ensures that the dataset covers a sufficient time period to capture the evolution of community dynamics. Sarah uses the TelegramToolkit to extract the channel to channel graph. She can now identify central nodes, clusters, and subgroups within the networks to understand how information flows and circulates within the communities.
-
-
-### Keywords
-Entity Detection, Graph Generation, Information Spread.
 
 
 ## Structure
@@ -85,7 +83,7 @@ options:
 
 ### Input data
 
-A sample data is made available with this repository under *data/*.
+A data sample is available with this repository under *data/*.
 
 If interested the user can feed the TelegramToolkit with the data collected by [TelegramDataCollector]() [In development]
 

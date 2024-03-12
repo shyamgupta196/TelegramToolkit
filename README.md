@@ -115,7 +115,7 @@ The Telegram Toolkit is designed to work with .jsonl files where each line of a 
 
 
 ## Contact
-danilo.dessi@gesis.org
+Danilo Dessi' at danilo.dessi@gesis.org
 
 [Big Data Analytics Team](https://www.gesis.org/en/institute/staff/orga/table/4/76?no_cache=1&cHash=74017e1debabf473c9611343a5d96842)
 

@@ -1,4 +1,4 @@
-# The Telegram Toolkit
+# The Telegram Toolkit: a tool to enrich Telegram data
 
 ## Description
 

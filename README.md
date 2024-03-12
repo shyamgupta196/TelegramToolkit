@@ -34,7 +34,7 @@ The Telegram Toolkit is designed to provide enriched data and features to addres
 
   6. *Disinformation and Misinformation*: How can the tracking of message propagation pathways assist in unraveling the dynamics of misinformation dissemination, rumor amplification, and collective sensemaking processes within Telegram channels, and what strategies can be devised to foster critical thinking and information literacy in online communities?
 
-### Social Science Usecase
+### Social Science Usecases
 
 **Usecase 1:** Upon finding the Telegram Toolkit in the Methods Hub, John explores its features and capabilities. He discovers functionalities such as entity identification and message chain generation, which are relevant to his research on disinformation in Telegram channels. John obtains a dataset of messages collected from Telegram channels using appropriate data collection methods. He ensures that the dataset covers the relevant period corresponding to the US Presidential Elections and contains messages from channels known for spreading political information and disinformation. John imports the collected dataset into the Telegram Toolkit for analysis. He verifies the integrity and format of the data to ensure compatibility with the Toolkit's processing algorithms. Using the Toolkit's entity identification feature, John identifies key entities related to the Presidential Elections within the dataset. Then, he creates the message chains; now he can investigate how disinformation propagates through message forwarding chains and explores the dynamics of information diffusion within the network.
 
@@ -68,7 +68,7 @@ options:
   -i INPUT_DATA_DIR, --input-data-dir INPUT_DATA_DIR
                         The input directory containing raw data from Telegram. Default: 'data/'
   -o OUTPUT_DATA_DIR, --output-data-dir OUTPUT_DATA_DIR
-                        The output directory where there results will be saved. Default: 'out/'
+                        The output directory where the results will be saved. Default: 'out/'
   -re, --resolve-entities
                         Resolve the entities in the raw Telegram data collection.
   -ccg, --create-channel-graph

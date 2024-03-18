@@ -60,7 +60,12 @@ The Telegram Toolkit is designed to provide enriched data and features to addres
 
 1. Install the requirements by running ```pip install -r requirements.txt```
 
-2. Use ```TelegramToolkit.py [-h] [-i INPUT_DATA_DIR] [-o OUTPUT_DATA_DIR] [-re] [-ccg] [-cmc] [-gn GRAPH_NAME] [-mcn MESSAGE_CHAIN_NAME ```
+2. Use 
+```
+TelegramToolkit.py [-h] [-i INPUT_DATA_DIR] [-o OUTPUT_DATA_DIR] [-re] [-ccg] [-cmc] [-gn GRAPH_NAME] [-mcn MESSAGE_CHAIN_NAME] 
+                   [-ef] [-efth ENTITY_FREQUENCY_THRESHOLD] [-eft] [-efs ENTITY_FREQUENCY_DEST] [-efc] [-efcth ENTITY_FREQUENCY_CHANNEL_THRESHOLD]
+                  [-efct] [-efcs ENTITY_FREQUENCY_CHANNEL_DEST]
+```
 
 The description of the parameters is:
 ```

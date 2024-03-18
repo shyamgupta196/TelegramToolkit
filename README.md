@@ -91,7 +91,7 @@ options:
   -eft, --entity-frequency-type
                         The Telegram Toolkit will consider the entity type while computing the entity frequency. It only works with either '-ef' or '--entity-frequency' option.
   -efs ENTITY_FREQUENCY_DEST, --entity-frequency-save ENTITY_FREQUENCY_DEST
-                        The output file containing the entity frequency. It only works with either '-ef' or '--entity-frequency' option. Default: entity_frequency
+                        The output file name containing the entity frequency. It only works with either '-ef' or '--entity-frequency' option. Default: entity_frequency
   -efc, --entity-frequency-channel
                         Compute the frequency of the entities over channels.
   -efcth ENTITY_FREQUENCY_CHANNEL_THRESHOLD, --entity-frequency-channel-threshold ENTITY_FREQUENCY_CHANNEL_THRESHOLD
@@ -101,7 +101,7 @@ options:
                         The Telegram Toolkit will consider the entity type while computing the entity frequency over channels. It only works with either '-efc' or '--entity-frequency-channel'
                         option.
   -efcs ENTITY_FREQUENCY_CHANNEL_DEST, --entity-frequency-channel-save ENTITY_FREQUENCY_CHANNEL_DEST
-                        The output file containing the entity frequency over channels. It only works with either '-efc' or '--entity-frequency-channel' option. Default:
+                        The output file name containing the entity frequency over channels. It only works with either '-efc' or '--entity-frequency-channel' option. Default:
                         entity_frequency_over_channels
 
 

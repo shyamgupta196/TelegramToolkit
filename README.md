@@ -81,28 +81,34 @@ options:
   -gn GRAPH_NAME, --graph-name GRAPH_NAME
                         Name of the graph created using the '-ccg' or '--create-channel-graph' option. Default: mygraph
   -mcn MESSAGE_CHAIN_NAME, --message-chain-name MESSAGE_CHAIN_NAME
-                        Name of the CSV file containing the information to which channels a message was forwarded to. It only works with either '-cmc' or '--create-message-chain' option.
+                        Name of the CSV file containing the information to which channels a message was forwarded to. 
+                        It only works with either '-cmc' or '--create-message-chain' option.
                         Default: my_message_chain
   -ef, --entity-frequency
                         Compute the frequency of the entities on the whole data.
   -efth ENTITY_FREQUENCY_THRESHOLD, --entity-frequency-threshold ENTITY_FREQUENCY_THRESHOLD
-                        Threshold to cut the entity frequency. Only entities appearing a number of times equal to or greater than the threshold are saved. It only works with either '-ef' or '
-                        --entity-frequency' option. Default: 1
+                        Threshold to cut the entity frequency. Only entities appearing a number of times equal to or greater than the threshold are saved. 
+                        It only works with either '-ef' or '--entity-frequency' option. Default: 1
   -eft, --entity-frequency-type
-                        The Telegram Toolkit will consider the entity type while computing the entity frequency. It only works with either '-ef' or '--entity-frequency' option.
+                        The Telegram Toolkit will consider the entity type while computing the entity frequency. 
+                        It only works with either '-ef' or '--entity-frequency' option.
   -efs ENTITY_FREQUENCY_DEST, --entity-frequency-save ENTITY_FREQUENCY_DEST
-                        The output file name containing the entity frequency. It only works with either '-ef' or '--entity-frequency' option. Default: entity_frequency
+                        The output file name containing the entity frequency. 
+                        It only works with either '-ef' or '--entity-frequency' option. 
+                        Default: entity_frequency
   -efc, --entity-frequency-channel
                         Compute the frequency of the entities over channels.
   -efcth ENTITY_FREQUENCY_CHANNEL_THRESHOLD, --entity-frequency-channel-threshold ENTITY_FREQUENCY_CHANNEL_THRESHOLD
-                        Threshold to cut the entity frequency over channels. Only entities appearing a number of times equal to or greater than the threshold are saved. It only works with
-                        either '-efc' or '--entity-frequency-channel' option. Default: 1
+                        Threshold to cut the entity frequency over channels. Only entities appearing a number of times equal to or greater than the threshold are saved. 
+                        It only works with either '-efc' or '--entity-frequency-channel' option. 
+                        Default: 1
   -efct, --entity-frequency-channel-type
-                        The Telegram Toolkit will consider the entity type while computing the entity frequency over channels. It only works with either '-efc' or '--entity-frequency-channel'
-                        option.
+                        The Telegram Toolkit will consider the entity type while computing the entity frequency over channels. 
+                        It only works with either '-efc' or '--entity-frequency-channel' option.
   -efcs ENTITY_FREQUENCY_CHANNEL_DEST, --entity-frequency-channel-save ENTITY_FREQUENCY_CHANNEL_DEST
-                        The output file name containing the entity frequency over channels. It only works with either '-efc' or '--entity-frequency-channel' option. Default:
-                        entity_frequency_over_channels
+                        The output file name containing the entity frequency over channels. 
+                        It only works with either '-efc' or '--entity-frequency-channel' option. 
+                        Default: entity_frequency_over_channels
 
 
 ```

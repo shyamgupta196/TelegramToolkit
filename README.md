@@ -12,6 +12,10 @@ The Telegram Toolkit provides the following functionalities:
 
 3. *Message chain generation*. When you post a message and someone re-posts or forwards it, you can usually see where and when the message is forwarded. This does not happen with Telegram messages. As a solution, this functionality creates a CSV file where each source message (i.e., a new message) is associated at least with one destination message (i.e., forwarded message), the forwarding time, and the message text. Messages that are never forwarded do not appear in the CSV. The user must note that the source message and its channel might not be contained in the input collection of data; this is because Telegram does not provide information about where a message is forwarded and the proposed generation uses a backward mechanism starting from the destination messages.
 
+4. *Compute the frequency of the entities over channels.* The tool computes the distribution of the entities for each channels.
+
+5. *Compute the frequency of the entities over whole data collection.* The tool computes the frequency of the entities on the whole data.
+
 
 **Note**: This tool is under active development, and new functionalities will be continuously added. If you have ideas for features that would enhance your research experience, please open an issue to share your suggestions with the MH Team. We'll carefully review each proposal to determine feasibility and prioritize implementation. Thank you for exploring our tool!
 
@@ -63,6 +67,7 @@ The description of the parameters is:
 
 Telegram Toolkit Commands
 
+
 options:
   -h, --help            show this help message and exit
   -i INPUT_DATA_DIR, --input-data-dir INPUT_DATA_DIR
@@ -78,8 +83,28 @@ options:
   -gn GRAPH_NAME, --graph-name GRAPH_NAME
                         Name of the graph created using the '-ccg' or '--create-channel-graph' option. Default: mygraph
   -mcn MESSAGE_CHAIN_NAME, --message-chain-name MESSAGE_CHAIN_NAME
-                        Name of the CSV file containing the information to which channels a message was forwarded to. It only works with either '-cmc' or '--create-
-                        message-chain' option. Default: my_message_chain
+                        Name of the CSV file containing the information to which channels a message was forwarded to. It only works with either '-cmc' or '--create-message-chain' option.
+                        Default: my_message_chain
+  -ef, --entity-frequency
+                        Compute the frequency of the entities from the raw Telegram data.
+  -efth ENTITY_FREQUENCY_THRESHOLD, --entity-frequency-threshold ENTITY_FREQUENCY_THRESHOLD
+                        Threshold to cut the entity frequency. Only entities appearing a number of times equal to or greater than the threshold are saved. It only works with either '-ef' or
+                        '--entity-frequency' option. Default: 1
+  -eft, --entity-frequency-type
+                        The Telegram Toolkit will consider the entity type while computing the entity frequency. It only works with either '-ef' or '--entity-frequency' option.
+  -efs ENTITY_FREQUENCY_DEST, --entity-frequency-save ENTITY_FREQUENCY_DEST
+                        The output file contaiing the entity frequency. It only works with either '-ef' or '--entity-frequency' option. Default: entity_frequency.json
+  -edc, --entity-distribution-channel
+                        Compute the distribution of the entities over channels.
+  -edth ENTITY_DISTRIBUTION_THRESHOLD, --entity-distribution-threshold ENTITY_DISTRIBUTION_THRESHOLD
+                        Threshold to cut the entity distribution over channels. Only entities appearing a number of times equal to or greater than the threshold are saved. It only works with
+                        either '-edc' or '--entity-distribution-channel' option. Default: 1
+  -edt, --entity-distribution-type
+                        The Telegram Toolkit will consider the entity type while computing the entity distribution over channels. It only works with either '-edc' or '--entity-distribution-
+                        channel' option.
+  -eds ENTITY_DISTRIBUTION_DEST, --entity-distribution-save ENTITY_DISTRIBUTION_DEST
+                        The output file contaiing the entity distribution over channels. It only works with either '-edc' or '--entity-distribution-channel' option. Default:
+                        entity_distribution_over_channels.json
 
 ```
 
@@ -108,6 +133,9 @@ A sample output (using the data under *data/*) is made available with this repos
 
   - *my_message_chain.csv* the CSV file containing information about the *source message id*, *source channel id*, *destination message id*, *destination channel id*, *time*, and *message text*.
 
+  - *entity_frequency.json* an example file of entity frequency computed on the whole sample data. Only entities with a frequency of at least 100 appear in the file.
+
+  - *entity_frequency_channels.jsonl* an example output file of entity frequency over channels. Only entities that appear at least 100 times in a single channel appear in the file.
 
 ### Limitation
 

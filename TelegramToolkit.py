@@ -50,7 +50,12 @@ class TelegramMessage:
 			return self.msg['fwd_from']['channel_post']
 		return None
 
-
+	def getEntities(self):
+		if 'entities' in self.msg:
+			self.resolveEntities()
+			return self.msg['entities'] 
+		else:
+			return []
 
 
 	def __decode_unicode_escape_sequences(self,text):
@@ -165,7 +170,64 @@ class TelegramToolkit:
 
 
 
+	def compute_entity_frequency(self, th, use_type, dest):
+		print('#\tEntity Frequency\t#')
+		ecount = {}
+		for file in tqdm(list(os.listdir(self.messages_collection_dir))):
+			with open(self.messages_collection_dir + file, 'r') as fi:
+				for line in fi:
+					msg = json.loads(line)
+					tmsg = TelegramMessage(msg)
+					entities = tmsg.getEntities()
+					for entity in entities:
+						entity_text = entity['entity_text'].strip()
+						entity_type = entity['_']
 
+						if use_type:
+							if (entity_text, entity_type) not in ecount:
+								ecount[(entity_text, entity_type)] = 0
+							ecount[(entity_text, entity_type)] += 1	
+						else:
+							if entity_text not in ecount:
+								ecount[entity_text] = 0
+							ecount[entity_text] += 1
+		ecount = dict([(str(entity), count) for (entity, count) in sorted(ecount.items(), key=lambda x : x[1], reverse=True) if count >= th ])
+
+		with open(self.out_dir + dest + '.json', 'w+', encoding='utf-8') as fo:
+			json.dump(ecount, fo, ensure_ascii=False, indent=4)
+						
+
+
+	def computer_entity_frequency_over_channels(self, th, use_type, dest):
+		print('#\tEntity Frequency over Channels\t#')
+		channel2dist = {}
+		for file in tqdm(list(os.listdir(self.messages_collection_dir))):
+			dist = {}
+			channel_id = file.replace('.txt', '').split('_')[-1]
+			with open(self.messages_collection_dir + file, 'r') as fi:
+				for line in fi:
+					msg = json.loads(line)
+					tmsg = TelegramMessage(msg)
+					entities = tmsg.getEntities()
+					for entity in entities:
+						entity_text = entity['entity_text'].strip()
+						entity_type = entity['_']
+						if use_type:
+							if (entity_text, entity_type) not in dist:
+								dist[(entity_text, entity_type)] = 0
+							dist[(entity_text, entity_type)] += 1	
+						else:
+							if entity_text not in dist:
+								dist[entity_text] = 0
+							dist[entity_text] += 1
+
+				dist = dict([(str(entity), count) for (entity, count) in sorted(dist.items(), key=lambda x : x[1], reverse=True) if count >= th ])
+				channel2dist[channel_id] = dist
+
+			with open(self.out_dir + dest + '.jsonl', 'w+', encoding='utf-8') as fo:
+				for channel, dist in channel2dist.items():
+					json.dump({'channel id': channel_id, 'entity distribution': dist}, fo, ensure_ascii=False)	
+					fo.write('\n')	
 
 if __name__ == '__main__':
 
@@ -173,11 +235,29 @@ if __name__ == '__main__':
 	parser = argparse.ArgumentParser(description='Telegram Toolkit Commands')
 	parser.add_argument('-i', '--input-data-dir', dest='input_data_dir', default='data/', type=str, action='store', help='The input directory containing raw data from Telegram. Default: \'data/\'')
 	parser.add_argument('-o', '--output-data-dir', dest='output_data_dir', default='out/', type=str, action='store', help='The output directory where the results will be saved. Default: \'out/\'')
-	parser.add_argument('-re', '--resolve-entities', dest='resolve_entity_flag', action='store_true', help='Resolve the entities in the raw Telegran data collection.')
+	
+	parser.add_argument('-re', '--resolve-entities', dest='resolve_entity_flag', action='store_true', help='Resolve the entities in the raw Telegram data collection.')
+	
 	parser.add_argument('-ccg', '--create-channel-graph', dest='create_channel_graph_flag', action='store_true', help='Create the channel-to-channel graph from the Telegram data collection.')
 	parser.add_argument('-cmc', '--create-message-chain', dest='create_message_chain_flag', action='store_true', help='Create the message chains of the messages from the Telegram data collection.')
 	parser.add_argument('-gn', '--graph-name', dest='graph_name', default='mygraph', action='store', help='Name of the graph created using the \'-ccg\' or \'--create-channel-graph\' option. Default: mygraph')
 	parser.add_argument('-mcn', '--message-chain-name', dest='message_chain_name', default='my_message_chain', action='store', help='Name of the CSV file containing the information to which channels a message was forwarded to. It only works with either \'-cmc\' or \'--create-message-chain\' option. Default: my_message_chain')
+	
+	parser.add_argument('-ef', '--entity-frequency', dest='entity_frequency_flag', action='store_true', help='Compute the frequency of the entities on the whole data.')
+	parser.add_argument('-efth', '--entity-frequency-threshold', dest='entity_frequency_threshold', default='1', action='store', help='Threshold to cut the entity frequency. Only entities appearing a number of times equal to or greater than the threshold are saved. It only works with either \'-ef\' or \'--entity-frequency\' option. Default: 1')
+	parser.add_argument('-eft', '--entity-frequency-type', dest='entity_frequency_type', action='store_true', help='The Telegram Toolkit will consider the entity type while computing the entity frequency. It only works with either \'-ef\' or \'--entity-frequency\' option.')
+	parser.add_argument('-efs', '--entity-frequency-save', dest='entity_frequency_dest', default='entity_frequency', action='store', help='The output file containing the entity frequency. It only works with either \'-ef\' or \'--entity-frequency\' option. Default: entity_frequency')
+	
+	parser.add_argument('-efc', '--entity-frequency-channel', dest='entity_frequency_channel_flag', action='store_true', help='Compute the frequency of the entities over channels.')
+	parser.add_argument('-efcth', '--entity-frequency-channel-threshold', dest='entity_frequency_channel_threshold', default='1', action='store', help='Threshold to cut the entity frequency over channels. Only entities appearing a number of times equal to or greater than the threshold are saved. It only works with either \'-efc\' or \'--entity-frequency-channel\' option. Default: 1')
+	parser.add_argument('-efct', '--entity-frequency-channel-type', dest='entity_frequency_channel_type', action='store_true', help='The Telegram Toolkit will consider the entity type while computing the entity frequency over channels. It only works with either \'-efc\' or \'--entity-frequency-channel\' option.')
+	parser.add_argument('-efcs', '--entity-frequency-channel-save', dest='entity_frequency_channel_dest', default='entity_frequency_channels', action='store', help='The output file containing the entity frequency over channels. It only works with either \'-efc\' or \'--entity-frequency-channel\' option. Default: entity_frequency_over_channels')
+
+	#parser.add_argument('-edc', '--entity-distribution-channel', dest='entity_distribution_channel_flag', action='store_true', help='Compute the distribution of the entities over channels.')
+	#parser.add_argument('-edth', '--entity-distribution-threshold', dest='entity_distribution_threshold', default='1', action='store', help='Threshold to cut the entity distribution over channels. Only entities appearing a number of times equal to or greater than the threshold are saved. It only works with either \'-edc\' or \'--entity-distribution-channel\' option. Default: 1')
+	#parser.add_argument('-edt', '--entity-distribution-type', dest='entity_distribution_type', action='store_true', help='The Telegram Toolkit will consider the entity type while computing the entity distribution over channels. It only works with either \'-edc\' or \'--entity-distribution-channel\' option.')
+	#parser.add_argument('-eds', '--entity-distribution-save', dest='entity_distribution_dest', default='entity_distribution.jsonl', action='store', help='The output file containing the entity distribution over channels. It only works with either \'-edc\' or \'--entity-distribution-channel\' option. Default: entity_distribution_over_channels.json')
+	
 	args = parser.parse_args()
 
 	# Add '\' character to directory paths if not present
@@ -204,7 +284,14 @@ if __name__ == '__main__':
 	if args.create_message_chain_flag:
 		toolkit.create_msg_chain(args.message_chain_name)
 
-	if not (args.resolve_entity_flag or args.create_channel_graph_flag or args.create_message_chain_flag):
+	if args.entity_frequency_flag:
+		toolkit.compute_entity_frequency(th=int(args.entity_frequency_threshold), use_type=args.entity_frequency_type, dest=args.entity_frequency_dest)
+
+	if args.entity_frequency_channel_flag:
+		toolkit.computer_entity_frequency_over_channels(th=int(args.entity_frequency_channel_threshold), use_type=args.entity_frequency_channel_type, dest=args.entity_frequency_channel_dest)
+
+
+	if not (args.resolve_entity_flag or args.create_channel_graph_flag or args.create_message_chain_flag or args.entity_frequency_flag or args.entity_frequency_channel_flag):
 		parser.print_help()
 
 

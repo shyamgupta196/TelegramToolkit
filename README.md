@@ -12,7 +12,7 @@ The Telegram Toolkit provides the following functionalities:
 
 3. *Message chain generation*. When you post a message and someone re-posts or forwards it, you can usually see where and when the message is forwarded. This does not happen with Telegram messages. As a solution, this functionality creates a CSV file where each source message (i.e., a new message) is associated at least with one destination message (i.e., forwarded message), the forwarding time, and the message text. Messages that are never forwarded do not appear in the CSV. The user must note that the source message and its channel might not be contained in the input collection of data; this is because Telegram does not provide information about where a message is forwarded and the proposed generation uses a backward mechanism starting from the destination messages.
 
-4. *Compute the frequency of the entities over channels.* The tool computes the distribution of the entities for each channels.
+4. *Compute the frequency of the entities over channels.* The tool computes the frequency of the entities for each channels.
 
 5. *Compute the frequency of the entities over whole data collection.* The tool computes the frequency of the entities on the whole data.
 

@@ -225,7 +225,7 @@ class TelegramToolkit:
 				channel2dist[channel_id] = dist
 
 			with open(self.out_dir + dest + '.jsonl', 'w+', encoding='utf-8') as fo:
-				for channel, dist in channel2dist.items():
+				for channel_id, dist in channel2dist.items():
 					json.dump({'channel id': channel_id, 'entity distribution': dist}, fo, ensure_ascii=False)	
 					fo.write('\n')	
 

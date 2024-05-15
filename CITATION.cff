@@ -1,0 +1,18 @@
+abstract: "This software enables the enrichment of Telegram data collected using the Telethon API."
+authors:
+  - family-names: Dessi'
+    given-names: Danilo
+    orcid: "https://orcid.org/0000-0003-3843-3285"
+  - family-names: Gangopadhyay
+    given-names: Susmita
+cff-version: 1.2.0
+date-released: "2024-04-01"
+keywords:
+  - "Entity Detection"
+  - "Graph Generation"
+  - "Information Spread"
+license: GNU General Public License v3.0
+message: "If you use this software, please cite it using these metadata."
+repository-code: "https://github.com/citation-file-format/my-research-software"
+title: "The Telegram Toolkit: a Tool to enrich Telegram Channel Data"
+version: 1.0

@@ -1,8 +1,7 @@
 # The Telegram Toolkit: a Tool to enrich Telegram Channel Data
 
 ## Description
-
-Telegram channels are public broadcast channels on the Telegram messaging platform where creators can share messages, media, and updates with a large audience. Users can join channels to receive notifications and access content posted by the channel administrators, making it an effective tool for disseminating information to a wide audience. The Telegram Toolkit is a powerful software designed to enhance collected Telegram data by uncovering implicit information not directly available through the platform. It facilitates tasks such as revealing connections between channels and creating message-forwarding chains, providing users with valuable insights and analysis capabilities.
+The method offers a Telegram data enrichment toolkit that enhances the Telegram messages by uncovering implicit information, otherwise not directly available through the platform. It reveals the channel connections i.e., channel to channel graph, provide message forwarding chain and extracts entities across channels. The method reads raw Telegram messages as JSON and extracts the additional information aggregated into new JSON files. The nature of messages on the platform and their penetration across multiple channels can address interesting research questions. 
 
 The Telegram Toolkit provides the following functionalities:
 
@@ -17,10 +16,8 @@ The Telegram Toolkit provides the following functionalities:
 5. *Compute the frequency of the entities over whole data collection.* The tool computes the frequency of the entities on the whole data.
 
 
-**Note**: This tool is under active development, and new functionalities will be continuously added. If you have ideas for features that would enhance your research experience, please open an issue to share your suggestions with the MH Team. We'll carefully review each proposal to determine feasibility and prioritize implementation. Thank you for exploring our tool!
-
 ## Keywords
-Entity Detection, Graph Generation, Information Spread.
+entity detection, graph generation, telegram 
 
 ## Relevant research questions that could be addressed with the help of this method 
 
@@ -163,7 +160,7 @@ The Telegram Toolkit is still being developed. Details about publications will b
 
 
   
-  
+ **Note**: This tool is under active development, and new functionalities will be continuously added. If you have ideas for features that would enhance your research experience, please open an issue to share your suggestions with the MH Team. We'll carefully review each proposal to determine feasibility and prioritize implementation. Thank you for exploring our tool! 
  
  
  

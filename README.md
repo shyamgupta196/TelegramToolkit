@@ -3,61 +3,41 @@
 ## Description
 The method offers a Telegram data enrichment toolkit that enhances the Telegram messages by uncovering implicit information, otherwise not directly available through the platform. It reveals the channel connections i.e., channel to channel graph, provide message forwarding chain and extracts entities across channels. The method reads raw Telegram messages as JSON and extracts the additional information aggregated into new JSON files. The nature of messages on the platform and their penetration across multiple channels can address interesting research questions. 
 
-The Telegram Toolkit provides the following functionalities:
-
-1. *Entities in Telegram*. Entities are provided only using text span indexes; the Telegram Toolkit extracts them.
-
-2. *Channel to channel graph*. Given the collected data, it creates a channel-to-channel graph where nodes are the channels and edges are built when a message is forwarded from a channel (source) to a destination channel. This functionality creates a graph in [GML format](https://networkx.org/documentation/stable/reference/readwrite/gml.html). The edges are associated with the times when messages are forwarded.
-
-3. *Message chain generation*. When you post a message and someone re-posts or forwards it, you can usually see where and when the message is forwarded. This does not happen with Telegram messages. As a solution, this functionality creates a CSV file where each source message (i.e., a new message) is associated at least with one destination message (i.e., forwarded message), the forwarding time, and the message text. Messages that are never forwarded do not appear in the CSV. The user must note that the source message and its channel might not be contained in the input collection of data; this is because Telegram does not provide information about where a message is forwarded and the proposed generation uses a backward mechanism starting from the destination messages.
-
-4. *Compute the frequency of the entities over channels.* The tool computes the frequency of the entities for each channels.
-
-5. *Compute the frequency of the entities over whole data collection.* The tool computes the frequency of the entities on the whole data.
-
-
-## Keywords
-entity detection, graph generation, telegram 
-
-## Relevant research questions that could be addressed with the help of this method 
-
-The Telegram Toolkit is designed to provide enriched data and features to address research questions like:
-
-  1. *Information Flow Analysis*: How does the use of the Telegram channel graph and entities enhance our understanding of information dissemination patterns within and across Telegram channels?
-
-  2. *Network Analysis*: What insights can be gained from analyzing the network structure of Telegram channels and their connections using the features provided by the Telegram Toolkit?
-
-  3. *Content Analysis*: How does the content shared across Telegram channels evolve over time, and how can entities assist in identifying trends, biases, and influential content creators?
-
-  4. *Audience Engagement*: To what extent does audience engagement, measured by factors such as message forwarding chains and user interaction, contribute to the success and longevity of Telegram channels?
-
-  5. *Community Structure and Boundary Formation*: How do the structures of message forwarding networks, uncovered by the TelegramToolkit, inform our understanding of community boundaries, subgroup formations, and the processes of inclusion and exclusion within Telegram ecosystems, and what implications do these dynamics have for social cohesion and identity formation?
-
-  6. *Disinformation and Misinformation*: How can the tracking of message propagation pathways assist in unraveling the dynamics of misinformation dissemination, rumor amplification, and collective sensemaking processes within Telegram channels, and what strategies can be devised to foster critical thinking and information literacy in online communities?
-
-### Social Science Usecases
+## Use Cases
 
 **Usecase 1:** Upon finding the Telegram Toolkit in the Methods Hub, John explores its features and capabilities. He discovers functionalities such as entity identification and message chain generation, which are relevant to his research on disinformation in Telegram channels. John obtains a dataset of messages collected from Telegram channels using appropriate data collection methods. He ensures that the dataset covers the relevant period corresponding to the US Presidential Elections and contains messages from channels known for spreading political information and disinformation. John imports the collected dataset into the Telegram Toolkit for analysis. He verifies the integrity and format of the data to ensure compatibility with the Toolkit's processing algorithms. Using the Toolkit's entity identification feature, John identifies key entities related to the Presidential Elections within the dataset. Then, he creates the message chains; now he can investigate how disinformation propagates through message forwarding chains and explores the dynamics of information diffusion within the network.
 
 **Usecase 2:** Sarah designs her research study to explore the social dynamics within Telegram communities, focusing on the role of message-forwarding networks in shaping community boundaries and subgroup formations. Sarah collects a dataset of messages from a diverse range of Telegram channels representing various communities and topics of interest. She ensures that the dataset covers a sufficient period to capture the evolution of community dynamics. Sarah uses the Telegram Toolkit to extract the channel-to-channel graph. She can now identify central nodes, clusters, and subgroups within the networks to understand how information flows and circulates within the communities.
 
+## Input Data
+A data sample is available with this repository under *data/*.
 
-## Structure
+If interested the user can feed the TelegramToolkit with the data collected by [TelegramDataCollector]() [In development]
 
-- *data/* contains sample data composed of different files. Each file contains messages from a specific channel.
+## Output Data
 
-- *sample_output_entities/* and *sample_output/* contain sample output dataset as described below.
+A sample output (using the data under *data/*) is made available with this repository.
 
-- *TelegramToolkit.py* contains the source code of the toolkit that implements the *TelegramToolkit* and *TelegramMessage* classes devised to perform the tool functions.
+- *sample_output_entities/* contains all the messages with their entities that have been made explicit.
 
-- *requirements.txt* the requirements necessary to use the Telegram Toolkit. 
+- *sample_output/* contains:
 
+  - *mygraph.gml* the channel-to-channel graph with information about the times a destination channel posted a message from a source channel.
+
+  - *my_message_chain.csv* the CSV file containing information about the *source message id*, *source channel id*, *destination message id*, *destination channel id*, *time*, and *message text*.
+
+  - *entity_frequency.json* an example file of entity frequency computed on the whole sample data. Only entities with a frequency of at least 100 appear in the file.
+
+  - *entity_frequency_channels.jsonl* an example output file of entity frequency over channels. Only entities that appear at least 100 times in a single channel appear in the file.
+
+## Hardware Requirements
+Depending on the scale of data (in Millions), the method requires GPU with (2 x Intel Xeon 2.1 GHz (2 x 24 Cores, 2 x 48 Threads) and 1.4 TB RAM).
+
+## Environment Setup 
+Install the requirements by running ```pip install -r requirements.txt```
 
 ## How to Use
-
-1. Install the requirements by running ```pip install -r requirements.txt```
-
-2. Use 
+Use 
 ```
 TelegramToolkit.py [-h] [-i INPUT_DATA_DIR] [-o OUTPUT_DATA_DIR] [-re] [-ccg] [-cmc] [-gn GRAPH_NAME] [-mcn MESSAGE_CHAIN_NAME] 
                    [-ef] [-efth ENTITY_FREQUENCY_THRESHOLD] [-eft] [-efs ENTITY_FREQUENCY_DEST] [-efc] [-efcth ENTITY_FREQUENCY_CHANNEL_THRESHOLD]
@@ -111,56 +91,41 @@ options:
                         The output file name containing the entity frequency over channels. 
                         It only works with either '-efc' or '--entity-frequency-channel' option. 
                         Default: entity_frequency_over_channels
-
-
 ```
 
-### Input data
+## Technical Details
+The Telegram Toolkit provides the following functionalities:
 
-A data sample is available with this repository under *data/*.
+1. *Entities in Telegram*. Entities are provided only using text span indexes; the Telegram Toolkit extracts them.
 
-If interested the user can feed the TelegramToolkit with the data collected by [TelegramDataCollector]() [In development]
+2. *Channel to channel graph*. Given the collected data, it creates a channel-to-channel graph where nodes are the channels and edges are built when a message is forwarded from a channel (source) to a destination channel. This functionality creates a graph in [GML format](https://networkx.org/documentation/stable/reference/readwrite/gml.html). The edges are associated with the times when messages are forwarded.
+
+3. *Message chain generation*. When you post a message and someone re-posts or forwards it, you can usually see where and when the message is forwarded. This does not happen with Telegram messages. As a solution, this functionality creates a CSV file where each source message (i.e., a new message) is associated at least with one destination message (i.e., forwarded message), the forwarding time, and the message text. Messages that are never forwarded do not appear in the CSV. The user must note that the source message and its channel might not be contained in the input collection of data; this is because Telegram does not provide information about where a message is forwarded and the proposed generation uses a backward mechanism starting from the destination messages.
+
+4. *Compute the frequency of the entities over channels.* The tool computes the frequency of the entities for each channels.
+
+5. *Compute the frequency of the entities over whole data collection.* The tool computes the frequency of the entities on the whole data.
+
+**Relevant research questions that could be addressed with the help of this method** 
+
+The Telegram Toolkit is designed to provide enriched data and features to address research questions like:
+
+  1. *Information Flow Analysis*: How does the use of the Telegram channel graph and entities enhance our understanding of information dissemination patterns within and across Telegram channels?
+
+  2. *Network Analysis*: What insights can be gained from analyzing the network structure of Telegram channels and their connections using the features provided by the Telegram Toolkit?
+
+  3. *Content Analysis*: How does the content shared across Telegram channels evolve over time, and how can entities assist in identifying trends, biases, and influential content creators?
+
+  4. *Audience Engagement*: To what extent does audience engagement, measured by factors such as message forwarding chains and user interaction, contribute to the success and longevity of Telegram channels?
+
+  5. *Community Structure and Boundary Formation*: How do the structures of message forwarding networks, uncovered by the TelegramToolkit, inform our understanding of community boundaries, subgroup formations, and the processes of inclusion and exclusion within Telegram ecosystems, and what implications do these dynamics have for social cohesion and identity formation?
+
+  6. *Disinformation and Misinformation*: How can the tracking of message propagation pathways assist in unraveling the dynamics of misinformation dissemination, rumor amplification, and collective sensemaking processes within Telegram channels, and what strategies can be devised to foster critical thinking and information literacy in online communities?
 
 
-
-### Sample Input to the method
-
-Please explore *data/*.
-
-
-### Sample Output of the method
-
-A sample output (using the data under *data/*) is made available with this repository.
-
-- *sample_output_entities/* contains all the messages with their entities that have been made explicit.
-
-- *sample_output/* contains:
-
-  - *mygraph.gml* the channel-to-channel graph with information about the times a destination channel posted a message from a source channel.
-
-  - *my_message_chain.csv* the CSV file containing information about the *source message id*, *source channel id*, *destination message id*, *destination channel id*, *time*, and *message text*.
-
-  - *entity_frequency.json* an example file of entity frequency computed on the whole sample data. Only entities with a frequency of at least 100 appear in the file.
-
-  - *entity_frequency_channels.jsonl* an example output file of entity frequency over channels. Only entities that appear at least 100 times in a single channel appear in the file.
-
-### Limitation
+## Disclaimer
 
 The Telegram Toolkit is designed to work with .jsonl files where each line of a file represents a [Telegram message as described by the Telethon API](https://tl.telethon.dev/constructors/message.html). 
 
-
-## Contact
-Danilo Dessi' at danilo.dessi@gesis.org
-
-[Big Data Analytics Team](https://www.gesis.org/en/institute/staff/orga/table/4/76?no_cache=1&cHash=74017e1debabf473c9611343a5d96842)
-
-
-## Publication 
-The Telegram Toolkit is still being developed. Details about publications will be added later in time.
-
-
-  
- **Note**: This tool is under active development, and new functionalities will be continuously added. If you have ideas for features that would enhance your research experience, please open an issue to share your suggestions with the MH Team. We'll carefully review each proposal to determine feasibility and prioritize implementation. Thank you for exploring our tool! 
- 
- 
- 
+## Contact Details
+For further queries, please contact [Susmita.Gangopadhyay@gesis.org](Susmita.Gangopadhyay@gesis.org)

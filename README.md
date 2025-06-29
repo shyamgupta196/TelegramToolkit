@@ -1,4 +1,4 @@
-# The Telegram Toolkit: a Tool to enrich Telegram Channel Data
+# The Telegram Toolkit: a Tool to Enrich Telegram Channel Data
 
 ## Description
 The method offers a Telegram data enrichment toolkit that enhances the Telegram messages by uncovering implicit information, otherwise not directly available through the platform. It reveals the channel connections i.e., channel to channel graph, provide message forwarding chain and extracts entities across channels. The method reads raw Telegram messages as JSON and extracts the additional information aggregated into new JSON files. The nature of messages on the platform and their penetration across multiple channels can address interesting research questions. 

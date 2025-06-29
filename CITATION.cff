@@ -6,7 +6,7 @@ authors:
   - family-names: Gangopadhyay
     given-names: Susmita
 cff-version: 1.2.0
-date-released: "2024-04-01"
+date-released: "2025-06-29"
 keywords:
   - "Entity Detection"
   - "Graph Generation"
@@ -15,4 +15,4 @@ license: GNU General Public License v3.0
 message: "If you use this software, please cite it using these metadata."
 repository-code: "https://github.com/citation-file-format/my-research-software"
 title: "The Telegram Toolkit: a Tool to enrich Telegram Channel Data"
-version: 1.0
+version: 1.5

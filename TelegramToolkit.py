@@ -10,6 +10,50 @@ import re
 
 
 class TelegramMessage:
+	"""
+	A class to represent and interact with a Telegram message object.
+	The `TelegramMessage` class provides methods to extract various attributes 
+	and metadata from a Telegram message, such as its ID, text, channel ID, 
+	timestamp, forwarding information, and entities.
+	Attributes:
+		msg (dict): The raw message data as a dictionary.
+	Methods:
+		__init__(msg):
+			Initializes the TelegramMessage object with the given message data.
+		setMsg(msg):
+			Updates the message data for the object.
+		getMessageID():
+			Retrieves the unique ID of the message.
+		getMessageText():
+			Retrieves the text content of the message.
+		getMessageChannelID():
+			Retrieves the channel ID associated with the message.
+		getMessageTime():
+			Retrieves the timestamp of when the message was sent.
+		getForwardedFrom():
+			Retrieves the forwarding information if the message was forwarded, 
+			or None if it was not.
+		getForwardedFromChannelID():
+			Retrieves the channel ID of the original message if the message 
+			was forwarded from a channel, or None otherwise.
+		getForwardedFromTime():
+			Retrieves the timestamp of the original message if the message 
+			was forwarded, or None otherwise.
+		getForwardedFromMessageID():
+			Retrieves the message ID of the original message if the message 
+			was forwarded, or None otherwise.
+		getEntities():
+			Retrieves the list of entities (e.g., mentions, hashtags, links) 
+			present in the message. Resolves and includes the text of each entity.
+		resolveEntities():
+			Resolves the entities in the message by extracting their text 
+			based on the offset and length, and updates the message data.
+		getMsg():
+			Retrieves the raw message data as a dictionary.
+		__decode_unicode_escape_sequences(text):
+			Decodes Unicode escape sequences in a given text string.
+	"""
+
 	def __init__(self, msg):
 		self.msg = msg
 		
@@ -82,6 +126,33 @@ class TelegramMessage:
 
 
 class TelegramToolkit:
+	"""
+	TelegramToolkit is a utility class for processing and analyzing Telegram messages. 
+	It provides functionalities to construct graphs, analyze message chains, extract entities, 
+	and compute entity frequencies from a collection of Telegram messages.
+	Attributes:
+		messages_collection_dir (str): Directory containing the collection of Telegram messages.
+		out_dir (str): Directory where output files will be saved.
+		channel_to_channel_graph (networkx.DiGraph): Directed graph representing relationships between channels.
+	Methods:
+		__init__(messages_collection_dir, out_dir):
+			Initializes the TelegramToolkit with the specified directories.
+		set_messages_collection_dir(messages_collection_dir):
+			Updates the directory containing the collection of Telegram messages.
+		save_channel_to_channel_graph(graph_name):
+			Saves the channel-to-channel graph to a file in GML format.
+		create_channel_to_channel_graph():
+			Constructs a directed graph representing relationships between channels based on forwarded messages.
+		create_msg_chain(message_chain_name):
+			Constructs a message chain from forwarded messages and saves it as a CSV file.
+		explicit_msg_entities():
+			Resolves and explicates entities in messages, saving the updated messages to the output directory.
+		compute_entity_frequency(th, use_type, dest):
+			Computes the frequency of entities across all messages and saves the result as a JSON file.
+		computer_entity_frequency_over_channels(th, use_type, dest):
+			Computes the frequency of entities for each channel and saves the result as a JSONL file.
+	"""
+
 	def __init__(self, messages_collection_dir, out_dir):
 		self.messages_collection_dir = messages_collection_dir
 		self.out_dir = out_dir
@@ -260,6 +331,9 @@ if __name__ == '__main__':
 	
 	args = parser.parse_args()
 
+	# 'args' likely holds command-line arguments parsed using a library like argparse.
+	# It could contain user-provided inputs such as flags or options for the script.
+
 	# Add '\' character to directory paths if not present
 	args.input_data_dir = args.input_data_dir if args.input_data_dir.endswith('/') else args.input_data_dir + '/'
 	args.output_data_dir = args.output_data_dir if args.output_data_dir.endswith('/') else args.output_data_dir + '/'
@@ -293,54 +367,13 @@ if __name__ == '__main__':
 
 	if not (args.resolve_entity_flag or args.create_channel_graph_flag or args.create_message_chain_flag or args.entity_frequency_flag or args.entity_frequency_channel_flag):
 		parser.print_help()
-
-
-
 	
 	# creation of channel to channel graph based on forwarded messages 
 	#toolkit.create_channel_to_channel_graph()
 	#toolkit.save_channel_to_channel_graph(CHANNEL_TO_CHANNEL_GRAPH_OUT)
-
 
 	# entities explicitation
 	#toolkit.explicit_msg_entities(OUTPUT_DATA_DIR)
 
 	#channels chain
 	#toolkit.create_msg_chain()
-
-
-
-				
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

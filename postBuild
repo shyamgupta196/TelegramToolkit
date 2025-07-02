@@ -1,3 +1,8 @@
+#!/usr/bin/env -S bash -v
+
+# determine which version of Quarto to install
+QUARTO_VERSION=1.7.29
+=======
 #!/bin/bash -v
 
 # determine which version of Quarto to install
@@ -33,7 +38,6 @@ rm -rf $PYTHON_SCRIPT
 
 fi
 
-
 echo
 echo Installing Quarto $QUARTO_VERSION
 echo
@@ -53,10 +57,4 @@ ln -s ~/.quarto/opt/quarto/bin/tools/x86_64/pandoc ~/.quarto/opt/quarto/bin/tool
 
 echo
 echo Installed Quarto
-echo
-# install required python packages
-python3 -m pip install jupyterlab-quarto==0.1.45
-
-echo
-echo Completed
 echo

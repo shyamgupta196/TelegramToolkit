@@ -4,7 +4,7 @@
 
 The method offers a Telegram data enrichment toolkit that enhances the Telegram messages by uncovering implicit information, otherwise not directly available through the platform. It reveals the channel connections i.e., channel to channel graph, provide message forwarding chain and extracts entities across channels. The method reads raw Telegram messages as JSON and extracts the additional information aggregated into new JSON files. The nature of messages on the platform and their penetration across multiple channels can address interesting research questions.
 
-**Output** sample from *entity_frequency.json* ![](image.png)
+**Output** sample from *entity_frequency.json* ![](data/image.png)
 
 ## Use Cases
 
@@ -21,6 +21,8 @@ Below is a sample of the dataset provided under the *data/* directory:
 {"id": 2, "date": "2023-01-01T12:05:00", "channel_id": 12346, "message": "Check out this amazing news!", "entities": [{"type": "url", "offset": 18, "length": 4}]}
 {"id": 3, "date": "2023-01-01T12:10:00", "channel_id": 12345, "message": "Forwarded message", "forwarded_from": {"channel_id": 12346, "message_id": 2}}
 ```
+
+**Note** - We use JSONL (JSON Lines) rather than JSON , since it allows streaming and processing large datasets line-by-line, making it memory-efficient and easier to handle incrementally.
 
 ### Metadata Explanation
 
@@ -74,7 +76,7 @@ To learn more about the description of the parameters use `TelegramToolkit.py -h
 
 Which outputs:
 
-```
+```         
 options:
   -h, --help            show this help message and exit
   -i INPUT_DATA_DIR, --input-data-dir INPUT_DATA_DIR
@@ -150,7 +152,7 @@ The Telegram Toolkit is designed to provide enriched data and features to addres
 
 6.  *Disinformation and Misinformation Tracking*: How can the tracking of message propagation pathways assist in unraveling the dynamics of misinformation dissemination, rumor amplification, and collective sensemaking processes within Telegram channels, and what strategies can be devised to foster critical thinking and information literacy in online communities?
 
-![alt text](image-1.png) **sample output** from *channel_entity_freq.json*
+![alt text](data/image-1.png) **sample output** from *channel_entity_freq.json*
 
 ## Disclaimer
 

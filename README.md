@@ -55,7 +55,7 @@ A sample output (using the data under *data/*) is made available with this repos
 
 ## Hardware Requirements
 
-The current file runs in ~25 mins on Apple silicon chip. But Depending on the scale of data (in Millions), the method requires GPU with (2 x Intel Xeon 2.1 GHz (2 x 24 Cores, 2 x 48 Threads) and 1.4 TB RAM).
+The current file runs in ~5 mins on Apple silicon chip. But Depending on the scale of data (in Millions), the method requires GPU with (2 x Intel Xeon 2.1 GHz (2 x 24 Cores, 2 x 48 Threads) and 1.4 TB RAM).
 
 ## Environment Setup
 
